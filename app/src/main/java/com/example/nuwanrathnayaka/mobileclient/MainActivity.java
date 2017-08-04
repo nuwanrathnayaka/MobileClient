@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
+                return true;
+            }
+        });
     }
 
     private void showFileChooser() {
@@ -144,6 +156,18 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.navigation_item_attachment:
+                Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.navigation_item_images:
+                Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
+                return true;
+        }
         Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
         return super.onOptionsItemSelected(item);
     }
