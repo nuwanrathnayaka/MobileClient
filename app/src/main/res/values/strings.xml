@@ -2,9 +2,11 @@
     <string name="app_name">MobileClient</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="nav_item_attachment">Women</string>
-    <string name="nav_item_images">Men</string>
-    <string name="nav_item_location">Kids</string>
+    <string name="nav_item_1">Women</string>
+    <string name="nav_item_2">Men</string>
+    <string name="nav_item_3">Kids</string>
+    <string name="nav_item_4">Accessories</string>
+    <string name="nav_item_5">Life Style</string>
     <string name="nav_sub_menu">Others</string>
     <string name="nav_sub_menu_item01">Home ware</string>
     <string name="nav_sub_menu_item02">Foods</string>

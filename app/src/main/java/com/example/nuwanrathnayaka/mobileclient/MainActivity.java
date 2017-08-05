@@ -74,6 +74,25 @@ public class MainActivity extends AppCompatActivity {
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
+
+                int id = menuItem.getItemId();
+
+                switch (id) {
+                    case android.R.id.home:
+                        mDrawerLayout.openDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.navigation_women:
+                        Toast.makeText(MainActivity.this, "nuwan", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(MainActivity.this, WomenActivity.class);
+                        startActivity(i);
+                        //break;
+                    case R.id.navigation_men:
+                        Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
+                        Intent j = new Intent(MainActivity.this, AddActivity.class);
+                        startActivity(j);
+                        return true;
+                }
+
                 return true;
             }
         });
@@ -161,14 +180,16 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.navigation_item_attachment:
-                Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.navigation_item_images:
+            case R.id.navigation_women:
+                Toast.makeText(MainActivity.this, "nuwan", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(MainActivity.this, WomenActivity.class);
+                startActivity(i);
+                //break;
+            case R.id.navigation_men:
                 Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
                 return true;
         }
-        Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, id, Toast.LENGTH_LONG).show();
         return super.onOptionsItemSelected(item);
     }
 }
