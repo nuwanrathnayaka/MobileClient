@@ -9,9 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,8 +31,9 @@ public class AddActivity extends AppCompatActivity {
 
     EditText add_title;
     EditText add_description;
-    EditText add_category;
     EditText add_price;
+
+    Spinner spinner;
 
     Button btn_add;
     Button btn_choose;
@@ -49,8 +52,13 @@ public class AddActivity extends AppCompatActivity {
         add_img= (ImageView) findViewById(R.id.add_img);
         add_title= (EditText) findViewById(R.id.add_title);
         add_description= (EditText) findViewById(R.id.add_description);
-        add_category= (EditText) findViewById(R.id.add_category);
         add_price= (EditText) findViewById(R.id.add_price);
+//spinner code
+        spinner = (Spinner) findViewById(R.id.cat_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         btn_add= (Button) findViewById(R.id.btn_add);
         btn_choose= (Button) findViewById(R.id.btn_choose);
@@ -79,11 +87,13 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        String title=add_title.getText().toString();
-        String price=add_price.getText().toString();
-        String description=add_description.getText().toString();
-        String category=add_category.getText().toString();
-        if(filePath==null && title.matches("") && price.matches("") && description.equals("") && category.matches("")){
+        final String title=add_title.getText().toString();
+        final double price=Double.parseDouble(add_price.getText().toString());
+        final String description=add_description.getText().toString();
+        //String category=add_category.getText().toString();
+
+        final String category=spinner.getSelectedItem().toString();
+        if(filePath==null && title.matches("")  && description.equals("") && category.matches("")){
             Toast.makeText(getApplicationContext(), "Enter one more fields!!!", Toast.LENGTH_LONG).show();
         }
 
@@ -107,7 +117,12 @@ public class AddActivity extends AppCompatActivity {
                                 //and displaying a success toast
                                 Uri location = taskSnapshot.getDownloadUrl();
                                 String file_loc = location.toString();
-                                Toast.makeText(getApplicationContext(), file_loc, Toast.LENGTH_LONG).show();
+                                //update the database
+                                Product product=new Product(title,"date",price,file_loc,category,description);
+                                DataAccess da=new DataAccess(product);
+                                da.setData();
+
+                                Toast.makeText(getApplicationContext(), "Updated Successfully!", Toast.LENGTH_LONG).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

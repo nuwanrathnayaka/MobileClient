@@ -45,10 +45,15 @@ public class DataAccess {
     }
 
     public void setData(){
-        mDatabase.child(table).child(key).child("title").setValue(product.getTitle());
-        mDatabase.child(table).child(key).child("category").setValue(product.getCategory());
-        mDatabase.child(table).child(key).child("description").setValue(product.getDescription());
-        mDatabase.child(table).child(key).child("price").setValue(product.getPrice());
-        mDatabase.child(table).child(key).child("icon").setValue(product.getUrl());
+        if(key!=null) {
+            mDatabase.child(table).child(key).child("title").setValue(product.getTitle());
+            mDatabase.child(table).child(key).child("category").setValue(product.getCategory());
+            mDatabase.child(table).child(key).child("description").setValue(product.getDescription());
+            mDatabase.child(table).child(key).child("price").setValue(product.getPrice());
+            mDatabase.child(table).child(key).child("icon").setValue(product.getUrl());
+        }
+        else{
+            //error message
+        }
     }
 }

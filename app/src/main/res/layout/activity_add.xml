@@ -45,11 +45,10 @@
                 android:inputType="numberDecimal"
                 android:id="@+id/add_price"/>
 
-            <EditText
+            <Spinner
+                android:id="@+id/cat_spinner"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Category"
-                android:id="@+id/add_category"/>
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:layout_width="fill_parent"

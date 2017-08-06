@@ -12,7 +12,14 @@ public class Product {
     private String category;
     private String description;
 
-    public Product(){}
+    public Product(String title,String date,double price,String url,String cat,String des){
+        this.title=title;
+        this.added_date=date;
+        this.price=price;
+        this.url=url;
+        this.category=cat;
+        this.description=des;
+    }
 
     public String getTitle() {
         return title;
